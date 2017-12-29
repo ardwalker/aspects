@@ -12,5 +12,10 @@ public class AnyObject {
     public void run2(String msg) {
         System.out.println(String.format("Inside the run2 method - %s", msg));
     }
+
+    @Override
+    public String toString() {
+        return "Anyobject::toString called";
+    }
 }
 

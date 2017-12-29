@@ -14,25 +14,19 @@ public class LearnAspect
         System.out.println("LearnAspect ctor");
     }
 
-    @Pointcut("execution(public void com.learning.Aspects.AnyObject.run2(String)) && args(val) ")
-    private void savePointcut(String val) { }
+    @Pointcut("execution(public void com.learning.Aspects.GenericAnyObject+.save(..)) && args(val) ")
+    private void savePointcut(AnyObject val) { }
 
     @AfterReturning("savePointcut(val)")
-    public void afterReturning(JoinPoint joinPoint, String val){
-
-        System.out.println(String.format("Testing - %s", val));
+    public void afterReturning(JoinPoint joinPoint, AnyObject val){
+        System.out.println(String.format("AfterReturning aspect - %s", val));
     }
 
-//    @AfterReturning(pointcut="execution(public void com.learning.Aspects.AnyObject.run2(String))")
-//    public void afterReturning() {
-//        System.out.println(String.format("AfterReturning executed! %s", value));
-//    }
-
-    @Around("execution(public void com.learning.Aspects.AnyObject.run2(String))")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("Around - before execution");
+    @Around("savePointcut(val)")
+    public Object around(ProceedingJoinPoint pjp, AnyObject val) throws Throwable {
+        System.out.println("Around aspect - before execution");
         Object retVal = pjp.proceed();
-        System.out.println("Around - after execution");
+        System.out.println("Around aspect - after execution");
         return retVal;
     }
 }

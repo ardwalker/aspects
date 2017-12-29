@@ -18,4 +18,9 @@ public class ApplicationConfiguration {
         return new AnyObject();
     }
 
+    @Bean
+    public GenericAnyObject<AnyObject> anyObjectGeneric() {
+        return new GenericAnyObject<>();
+    }
+
 }

@@ -10,14 +10,10 @@ public class AspectsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AspectsApplication.class, args);
-
         ApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
-        AnyObject bean = ctx.getBean(AnyObject.class);
-
-        bean.run1();
-
-        bean.run2("This is a test");
-
+        AnyObject anyObject = ctx.getBean(AnyObject.class);
+        GenericAnyObject<AnyObject> obj = (GenericAnyObject<AnyObject>) ctx.getBean("anyObjectGeneric");
+        obj.save(anyObject);
     }
 }
